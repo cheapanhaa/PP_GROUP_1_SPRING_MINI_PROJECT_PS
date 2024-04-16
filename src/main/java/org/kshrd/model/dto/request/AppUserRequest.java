@@ -1,2 +1,4 @@
-package org.kshrd.model.dto.request;public class AppUserRequest {
+package org.kshrd.model.dto.request;
+
+public class AppUserRequest {
 }

@@ -1,2 +1,4 @@
-package org.kshrd.repository;public class ExpenseCategory {
+package org.kshrd.repository;
+
+public interface ExpenseRepository {
 }

@@ -1,2 +1,4 @@
-package org.kshrd.configuration;public class SecurityConfig {
+package org.kshrd.configuration;
+
+public class SecurityConfig {
 }

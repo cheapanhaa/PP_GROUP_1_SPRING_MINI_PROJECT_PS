@@ -1,2 +1,4 @@
-package org.kshrd.configuration;public class FileConfig {
+package org.kshrd.configuration;
+
+public class FileConfig {
 }

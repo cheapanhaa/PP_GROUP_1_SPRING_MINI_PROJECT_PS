@@ -1,2 +1,4 @@
-package org.kshrd.controller;public class ExpenseController {
+package org.kshrd.controller;
+
+public class ExpenseController {
 }

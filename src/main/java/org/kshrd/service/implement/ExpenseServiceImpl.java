@@ -1,4 +1,4 @@
-package org.kshrd.service;
+package org.kshrd.service.implement;
 
-public interface ExpenseService {
+public class ExpenseServiceImpl {
 }

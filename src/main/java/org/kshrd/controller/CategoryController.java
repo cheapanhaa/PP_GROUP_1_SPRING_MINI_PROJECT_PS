@@ -1,2 +1,4 @@
-package org.kshrd.controller;public class CategoryController {
+package org.kshrd.controller;
+
+public class CategoryController {
 }

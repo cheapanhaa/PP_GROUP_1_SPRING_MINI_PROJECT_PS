@@ -1,2 +1,4 @@
-package org.kshrd.service;public class CategoryService {
+package org.kshrd.service;
+
+public interface CategoryService {
 }

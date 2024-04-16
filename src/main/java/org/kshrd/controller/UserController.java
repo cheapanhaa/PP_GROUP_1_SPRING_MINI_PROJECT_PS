@@ -1,2 +1,4 @@
-package org.kshrd.controller;public class UserController {
+package org.kshrd.controller;
+
+public class UserController {
 }

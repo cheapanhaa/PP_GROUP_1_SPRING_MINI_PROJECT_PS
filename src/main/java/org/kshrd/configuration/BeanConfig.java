@@ -1,2 +1,4 @@
-package org.kshrd.configuration;public class BeanConfig {
+package org.kshrd.configuration;
+
+public class BeanConfig {
 }

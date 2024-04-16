@@ -1,2 +1,4 @@
-package org.kshrd.exception;public class GlobalException {
+package org.kshrd.exception;
+
+public class GlobalException {
 }

@@ -1,2 +1,4 @@
-package org.kshrd.repository;public class AppUserRepository {
+package org.kshrd.repository;
+
+public interface AppUserRepository {
 }

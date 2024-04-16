@@ -1,2 +1,4 @@
-package org.kshrd.model.dto.request;public class AuthRequest {
+package org.kshrd.model.dto.request;
+
+public class AuthRequest {
 }

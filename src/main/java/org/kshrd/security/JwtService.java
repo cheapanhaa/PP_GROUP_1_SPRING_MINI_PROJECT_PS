@@ -1,2 +1,4 @@
-package org.kshrd.security;public class JwtService {
+package org.kshrd.security;
+
+public class JwtService {
 }

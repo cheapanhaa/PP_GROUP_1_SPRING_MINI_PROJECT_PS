@@ -1,2 +1,4 @@
-package org.kshrd.repository;public class CategoryRepository {
+package org.kshrd.repository;
+
+public interface CategoryRepository {
 }

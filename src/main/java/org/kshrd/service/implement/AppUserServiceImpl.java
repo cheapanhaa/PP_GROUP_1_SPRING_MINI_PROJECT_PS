@@ -1,4 +1,4 @@
-package org.kshrd.service;
+package org.kshrd.service.implement;
 
-public interface AppUserService {
+public class AppUserServiceImpl {
 }

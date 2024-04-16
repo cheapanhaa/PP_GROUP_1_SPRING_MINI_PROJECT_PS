@@ -1,2 +1,4 @@
-package org.kshrd.security;public class JwtAuthFilter {
+package org.kshrd.security;
+
+public class JwtAuthFilter {
 }

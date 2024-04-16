@@ -1,2 +1,4 @@
-package org.kshrd.model.entity;public class Category {
+package org.kshrd.model.entity;
+
+public class Category {
 }

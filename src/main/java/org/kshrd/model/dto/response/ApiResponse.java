@@ -1,2 +1,4 @@
-package org.kshrd.model.dto.response;public class ApiResponse {
+package org.kshrd.model.dto.response;
+
+public class ApiResponse {
 }

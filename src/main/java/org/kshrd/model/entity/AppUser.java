@@ -1,2 +1,4 @@
-package org.kshrd.model.entity;public class AppUser {
+package org.kshrd.model.entity;
+
+public class AppUser {
 }

@@ -1,4 +1,4 @@
-package org.kshrd.service;
+package org.kshrd.service.implement;
 
-public interface FileService {
+public class FileServiceImpl {
 }

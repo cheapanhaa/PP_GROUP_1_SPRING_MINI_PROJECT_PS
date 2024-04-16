@@ -1,2 +1,4 @@
-package org.kshrd.security;public class JwtAuthEntryPoint {
+package org.kshrd.security;
+
+public class JwtAuthEntryPoint {
 }

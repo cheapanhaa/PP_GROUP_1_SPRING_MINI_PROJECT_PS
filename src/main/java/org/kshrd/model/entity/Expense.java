@@ -1,2 +1,4 @@
-package org.kshrd.model.entity;public class Expense {
+package org.kshrd.model.entity;
+
+public class Expense {
 }

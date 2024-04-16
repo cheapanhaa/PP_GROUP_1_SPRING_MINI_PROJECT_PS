@@ -1,2 +1,4 @@
-package org.kshrd.service;public class AppUserService {
+package org.kshrd.service;
+
+public interface AppUserService {
 }
