@@ -3,7 +3,7 @@ CREATE TABLE users(
     email varchar(100),
     password varchar(50),
     profile_image varchar(200)
-)
+);
 
 CREATE TABLE otps(
     opt_id serial primary key ,
@@ -13,7 +13,7 @@ CREATE TABLE otps(
     verity varchar(200),
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE
 
-)
+);
 
 CREATE TABLE categories(
     category_id serial primary key ,
@@ -21,7 +21,7 @@ CREATE TABLE categories(
     description varchar(200),
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE
 
-)
+);
 
 CREATE TABLE expenses(
     expense_id serial primary key ,
