@@ -56,9 +56,11 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/api/v1/files/**",
                                 "/api/v1/auths/**",
-                                "/api/v1/auths/login"
+                                "/api/v1/auths/login",
+                                "/api/v1/expense/**"
                         ).permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthEntrypoint))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
