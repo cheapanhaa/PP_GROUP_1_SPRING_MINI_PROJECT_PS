@@ -1,5 +1,6 @@
 package org.kshrd.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.kshrd.model.dto.response.ApiResponse;
 import org.kshrd.model.entity.Expense;
 import org.kshrd.service.ExpenseService;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/expense")
+@SecurityRequirement(name = "bearerAuth")
 public class ExpenseController {
     private final ExpenseService expenseService;
 
