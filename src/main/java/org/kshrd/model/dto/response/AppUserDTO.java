@@ -1,4 +1,4 @@
-package org.kshrd.model.dto.request;
+package org.kshrd.model.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class AppUserRequest {
+public class AppUserDTO{
+    private Integer userId;
     private String email;
-    private String password;
-    private String confirmPassword;
     private String profileImage;
 }
