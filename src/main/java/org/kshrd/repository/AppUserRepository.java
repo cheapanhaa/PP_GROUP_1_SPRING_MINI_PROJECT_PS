@@ -46,6 +46,7 @@ public interface AppUserRepository {
         SELECT * FROM categories
         WHERE category_id= #{id}
         """)
+
     @Results(value = {
             @Result(property = "categoryId",column = "category_Id"),
             @Result(property = "name",column = "name"),
