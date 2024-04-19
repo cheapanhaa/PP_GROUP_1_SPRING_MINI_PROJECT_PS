@@ -7,23 +7,22 @@
 </head>
 <body>
 
-<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
-    <div style="margin:50px auto;width:70%;padding:20px 0">
-        <div style="border-bottom:1px solid #eee">
-            <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Your Brand</a>
+<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;line-height:2;text-align: center">
+    <div style="margin:50px auto;width:50%;padding:20px 0;">
+        <img src="https://download.logo.wine/logo/Spring_Framework/Spring_Framework-Logo.wine.png" style="width:60px;height: 60px;">
+        <div style="">
+
+            <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Expense Tracking Application </a>
         </div>
-        <p style="font-size:1.1em">Hi,</p>
-        <p>Thank you for choosing Your Brand. Use the following OTP to complete your Sign Up procedures. OTP is valid
-            for 1 minutes</p>
-        <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;"
-            th:text="${otp}"></h2>
-        <p style="font-size:0.9em;">Regards,<br/>Your Brand</p>
-        <hr style="border:none;border-top:1px solid #eee"/>
-        <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
-            <p>Your Brand Inc</p>
-            <p>1600 Amphitheatre Parkway</p>
-            <p>California</p>
-        </div>
+
+        <p style="font-size:1.1em">Before you sign in, we need to verify your identity. Enter the following code <br> on the sign-in page.</p>
+
+
+                <p style="font-size:1.4em;width: 130px; height: 40px;background-color:gainsboro;margin: auto; padding-top: 8px " th:text="${otp}"></p>
+
+
+        <p style="font-size:0.9em;">Welcome to the Expense Tracking Application. Here, you can monitor your expense and <br/>manage your budget effectively.</p>
+
     </div>
 </div>
 
