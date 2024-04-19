@@ -32,9 +32,21 @@ public interface CategoryRepository {
     List<Category> getAllCategories(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("currentUser") String currentUser);
 
     @Select("""
-           SELECT * FROM categories
-           WHERE category_id =#{id}
-           """)
+            SELECT * FROM categories
+            WHERE category_id =#{id}
+            """)
     @ResultMap("CategoryResultMap")
     Category getCategoriesById(@Param("id") Integer id, @Param("currentUser") String currentUser);
+
+    @Select("""
+            UPDATE categories SET name = #{categoryRequest.name}, description = #{categoryRequest.description} WHERE category_id = #{id}
+            RETURNING *
+            """)
+    @ResultMap("CategoryResultMap")
+    Category updateCategory(Integer id, @Param("categoryRequest") CategoryRequest categoryRequest, @Param("currentUser") String currentUser);
+
+    @Delete("""
+            DELETE FROM categories WHERE category_id = #{id}
+            """)
+    void deleteCategory (Integer id);
 }

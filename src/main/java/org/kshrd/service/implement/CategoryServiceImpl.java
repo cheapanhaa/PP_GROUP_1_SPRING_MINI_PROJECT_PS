@@ -31,4 +31,15 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoriesById(Integer id,String currentUser) {
         return categoryRepository.getCategoriesById(id, currentUser);
     }
+
+    @Override
+    public Category updateCategory(Integer id, CategoryRequest categoryRequest, String currentUser) {
+        getCategoriesById(id, currentUser);
+        return categoryRepository.updateCategory(id,categoryRequest,currentUser);
+    }
+
+    @Override
+    public void deleteCategory(Integer id) {
+        categoryRepository.deleteCategory(id);
+    }
 }

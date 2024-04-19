@@ -3,6 +3,7 @@ package org.kshrd.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.Positive;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.kshrd.model.dto.request.CategoryRequest;
@@ -61,7 +62,6 @@ public class CategoryController {
     public ResponseEntity<?> getCategoriesById(@PathVariable Integer id ){
         String currentUser = getUsernameOfCurrentUser();
         Category category = categoryService.getCategoriesById(id,currentUser);
-        System.out.println(category);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
                 .message("Get categories by id successfully.")
                 .payload(category)
@@ -70,7 +70,29 @@ public class CategoryController {
                 .build();
         return ResponseEntity.ok(categoryResponse);
     }
-
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CategoryRequest categoryRequest) {
+        String currentUser = getUsernameOfCurrentUser();
+        Category category = categoryService.updateCategory(id,categoryRequest,currentUser);
+        CategoryResponse<?> categoryResponse = CategoryResponse.builder()
+                .message("Categories has been updated successfully.")
+                .payload(category)
+                .status(HttpStatus.OK)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(categoryResponse);
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Integer id) {
+        categoryService.deleteCategory(id);
+        CategoryResponse<?> categoryResponse = CategoryResponse.builder()
+                .message("Categories has been remove successfully.")
+                .payload(null)
+                .status(HttpStatus.OK)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(categoryResponse);
+    }
     String getUsernameOfCurrentUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
