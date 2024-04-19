@@ -6,12 +6,16 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+@RestControllerAdvice
+@RestController
 public class GlobalExceptionHandling {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
 
@@ -20,7 +24,7 @@ public class GlobalExceptionHandling {
 
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setType(URI.create("about:blank"));
-        problemDetail.setTitle("Venue Not Found");
+        problemDetail.setTitle("Not Found");
         problemDetail.setStatus(404);
         problemDetail.setDetail(e.getMessage());
         problemDetail.setProperty("timestamp", LocalDateTime.now());
