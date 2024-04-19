@@ -3,6 +3,7 @@ package org.kshrd.repository;
 import org.apache.ibatis.annotations.*;
 import org.kshrd.model.dto.request.AppUserRequest;
 import org.kshrd.model.dto.response.AppUserDTO;
+import org.kshrd.model.dto.response.CategoryDTO;
 import org.kshrd.model.entity.AppUser;
 
 import java.util.List;
@@ -40,5 +41,15 @@ public interface AppUserRepository {
             @Result(property = "email", column = "email"),
             @Result(property = "profileImage", column = "profile_image")
     })
-    AppUserDTO getUserById(@Param("userId") Integer userId);
+    AppUserDTO getUserById( Integer userId);
+    @Select("""
+        SELECT * FROM categories
+        WHERE category_id= #{id}
+        """)
+    @Results(value = {
+            @Result(property = "categoryId",column = "category_Id"),
+            @Result(property = "name",column = "name"),
+            @Result(property = "description",column = "description")
+    })
+    CategoryDTO getCategoryById(Integer id);
 }

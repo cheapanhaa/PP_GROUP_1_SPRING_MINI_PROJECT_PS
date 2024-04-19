@@ -14,8 +14,11 @@ public interface ExpenseRepository {
             @Result(property = "amount", column = "amount"),
             @Result(property = "description", column = "description"),
             @Result(property = "date", column = "date"),
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "categoryId", column = "category_id")
+            @Result(property = "userId", column = "user_id",
+            one = @One(select = "org.kshrd.repository.AppUserRepository.getUserById")),
+            @Result(property = "categoryId", column = "category_id",
+            one = @One(select = "org.kshrd.repository.AppUserRepository.getCategoryById")
+            )
     })
     List<Expense> getAllExpense(@Param("offset") Integer offset, @Param("limit") Integer limit);
     @Select("""
@@ -24,6 +27,13 @@ public interface ExpenseRepository {
        """)
     @ResultMap("expenseMapping")
     List<Expense> getExpenseById(Integer expenseId);
+
+    @Select("""
+        DELETE FROM expenses
+        WHERE expense_id = #{id}
+        """)
+    @ResultMap("expenseMapping")
+    Expense deleteExpenseById(Integer id);
 }
 
 

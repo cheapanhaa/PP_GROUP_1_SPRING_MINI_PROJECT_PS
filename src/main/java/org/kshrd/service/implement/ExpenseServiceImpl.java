@@ -21,4 +21,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     public List<Expense> getExpenseById(Integer id) {
         return expenseRepository.getExpenseById(id);
     }
+
+    @Override
+    public Expense deleteExpenseById(Integer id) {
+        return expenseRepository.deleteExpenseById(id);
+    }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ExpenseService {
     List<Expense> getAllExpense(Integer offset, Integer limit);
     List<Expense> getExpenseById(Integer id);
+    Expense deleteExpenseById(Integer id);
 }
