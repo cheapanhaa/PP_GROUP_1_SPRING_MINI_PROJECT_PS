@@ -26,4 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllCategories(Integer offset, Integer limit, String currentUser) {
         return categoryRepository.getAllCategories(offset, limit, currentUser);
     }
+
+    @Override
+    public Category getCategoriesById(Integer id,String currentUser) {
+        return categoryRepository.getCategoriesById(id, currentUser);
+    }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface CategoryService {
     Category createCategory(CategoryRequest categoryRequest, String currentUser);
     List<Category> getAllCategories(Integer offset, Integer limit, String currentUser);
+    Category getCategoriesById(Integer id,String currentUser);
 }

@@ -30,4 +30,11 @@ public interface CategoryRepository {
             """)
     @ResultMap("CategoryResultMap")
     List<Category> getAllCategories(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("currentUser") String currentUser);
+
+    @Select("""
+           SELECT * FROM categories
+           WHERE category_id =#{id}
+           """)
+    @ResultMap("CategoryResultMap")
+    Category getCategoriesById(@Param("id") Integer id, @Param("currentUser") String currentUser);
 }
