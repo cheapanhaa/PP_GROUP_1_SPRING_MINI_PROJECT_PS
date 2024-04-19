@@ -1,5 +1,6 @@
 package org.kshrd.service.implement;
 
+import org.kshrd.exception.CustomNotFoundException;
 import org.kshrd.service.FileService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -29,9 +30,12 @@ public class FileServiceImpl implements FileService {
         Files.copy(file.getInputStream(), path.resolve(fileName));
         return fileName;
     }
-
     @Override
-    public Resource getFileByFileName(String fileName) throws IOException {
+    public Resource getFileByFileName (String fileName) throws IOException {
+        Path filePath = path.resolve(fileName);
+        if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
+            throw new CustomNotFoundException("File must be contain jpg, png, jpeg");
+        }
         Path path = Paths.get("src/main/resources/images/" + fileName);
         return new ByteArrayResource(Files.readAllBytes(path));
     }
