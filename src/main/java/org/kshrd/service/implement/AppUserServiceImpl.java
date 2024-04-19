@@ -17,11 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -69,6 +65,7 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public String verifyUser(String otp) {
+
         OtpsDTO otpsDTO = otpService.getOtp(otp);
 
         if (otpsDTO.isVerify()) {
@@ -85,6 +82,25 @@ public class AppUserServiceImpl implements AppUserService {
         OtpsDTO updateOtp = otpService.updateOtp(otpsDTO);
         System.out.println(updateOtp);
         return "OTP is verified";
+    }
+
+    @Override
+    public String resendOtp(String email) {
+        AppUser appUser = appUserRepository.findByEmail(email);
+        if (appUser == null) {
+            return "User not found";
+        }
+
+        OtpsDTO otpsDTO = otpUtil.generateOTP(appUser.getUserId());
+        otpService.saveOtp(otpsDTO);
+
+        try {
+            emailUtil.sendOtpEmail(appUser.getEmail(), otpsDTO.getOptCode());
+        } catch (MessagingException e) {
+            throw new RuntimeException("Unable to send otp please try again");
+        }
+
+        return "OTP has been sent to your email";
     }
 
     @Override

@@ -8,38 +8,26 @@ import java.util.List;
 
 @Mapper
 public interface CategoryRepository {
+
     @Select("""
-            SELECT * FROM categories LIMIT #{limit} OFFSET (#{offset}-1) * #{limit}
+            INSERT INTO categories(name, description, user_id)
+            VALUES(#{categoryRequest.name}, #{categoryRequest.description}, (SELECT user_id FROM users WHERE email = #{currentUser}))
+            returning *
             """)
-    @Results(id = "categoryMapping", value = {
+    @Results(id = "CategoryResultMap", value = {
             @Result(property = "categoryId", column = "category_id"),
             @Result(property = "name", column = "name"),
             @Result(property = "description", column = "description"),
-            @Result(property = "users", column = "category_id",
-                    one = @One(select = "org.kshrd.repository.AppUserRepository.getAllUserByCategoryId")
-            )
+            @Result(property = "user", column = "user_id",
+                    one = @One(select = "org.kshrd.repository.AppUserRepository.getUserById"))
     })
-    List<Category> getAllCategory(Integer offset, Integer limit);
+    Category createCategory(@Param("categoryRequest") CategoryRequest categoryRequest, @Param("currentUser") String currentUser);
 
     @Select("""
-            SELECT * FROM categories WHERE category_id = #{id}
+            SELECT * FROM categories
+            WHERE user_id = (SELECT user_id FROM users WHERE email = #{currentUser})
+            LIMIT #{limit} OFFSET #{offset}
             """)
-    @ResultMap("categoryMapping")
-    Category getCategoryById(Integer id);
-
-    @Select("""
-                    INSERT INTO categories (name,description) values (#{name},#{description}) RETURNING *  
-            """)
-    @ResultMap("categoryMapping")
-    Category createCategory(CategoryRequest categoryRequest);
-
-    @Update("""
-            UPDATE categories SET name= #{categoryRequest.name},description= #{categoryRequest.description}
-            """)
-    void updateCategory(Integer id,@Param("categoryRequest") CategoryRequest categoryRequest);
-
-    @Delete("""
-             DELETE FROM categories WHERE category_id = #{id}
-             """)
-    void deleteCategory(Integer id);
+    @ResultMap("CategoryResultMap")
+    List<Category> getAllCategories(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("currentUser") String currentUser);
 }
