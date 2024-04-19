@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,4 +43,15 @@ public class ExpenseController {
         );
         return ResponseEntity.ok(apiResponse);
         }
+        @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteExpenseById(@PathVariable Integer id) {
+        Expense expense =expenseService.deleteExpenseById(id);
+//        ApiResponse<Expense> apiResponse = new ApiResponse<>(
+//                "The expense has been successfully removed",
+//                HttpStatus.OK,
+//                LocalDateTime.now()
+//        );
+        return ResponseEntity.ok( "DeleteSuccessfully");
+
+    }
 }

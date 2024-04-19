@@ -3,6 +3,9 @@ package org.kshrd.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kshrd.model.dto.response.AppUserDTO;
+import org.kshrd.model.dto.response.CategoryDTO;
+import org.kshrd.model.dto.response.CategoryResponse;
 
 import java.util.Date;
 
@@ -14,6 +17,6 @@ public class Expense {
     private int amount;
     private String Description;
     private Date date;
-    private int userId;
-    private int categoryId;
+    private AppUserDTO userId;
+    private CategoryDTO categoryId;
 }
