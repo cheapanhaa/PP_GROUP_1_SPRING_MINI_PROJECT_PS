@@ -2,6 +2,7 @@ package org.kshrd.controller;
 
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -59,7 +60,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
     @GetMapping("{id}")
-    public ResponseEntity<?> getCategoriesById(@PathVariable Integer id ){
+    public ResponseEntity<?> getCategoriesById(@Valid @PathVariable Integer id ){
         String currentUser = getUsernameOfCurrentUser();
         Category category = categoryService.getCategoriesById(id,currentUser);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
@@ -71,7 +72,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
     @PutMapping("{id}")
-    public ResponseEntity<?> updateCategory(@PathVariable Integer id, @RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<?> updateCategory(@Valid @PathVariable Integer id, @RequestBody CategoryRequest categoryRequest) {
         String currentUser = getUsernameOfCurrentUser();
         Category category = categoryService.updateCategory(id,categoryRequest,currentUser);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
@@ -83,8 +84,9 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteCategory(@PathVariable Integer id) {
-        categoryService.deleteCategory(id);
+    public ResponseEntity<?> deleteCategory(@Valid @PathVariable Integer id) {
+        String currentUser = getUsernameOfCurrentUser();
+        categoryService.deleteCategory(id, currentUser);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
                 .message("Categories has been remove successfully.")
                 .payload(null)
@@ -100,7 +102,6 @@ public class CategoryController {
         System.out.println(username);
         return username;
     }
-
 }
 
 

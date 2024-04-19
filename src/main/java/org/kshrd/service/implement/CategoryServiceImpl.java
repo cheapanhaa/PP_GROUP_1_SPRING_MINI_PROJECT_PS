@@ -1,5 +1,6 @@
 package org.kshrd.service.implement;
 
+import org.kshrd.exception.CustomNotFoundException;
 import org.kshrd.model.dto.request.CategoryRequest;
 import org.kshrd.model.entity.Category;
 import org.kshrd.repository.CategoryRepository;
@@ -19,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category createCategory(CategoryRequest categoryRequest, String currentUser) {
+
         return categoryRepository.createCategory(categoryRequest, currentUser);
     }
 
@@ -29,6 +31,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoriesById(Integer id,String currentUser) {
+        if (categoryRepository.getCategoriesById(id,currentUser) == null) {
+            throw new CustomNotFoundException("The categories with id " + id + " has not been founded.");
+        }
         return categoryRepository.getCategoriesById(id, currentUser);
     }
 
@@ -39,7 +44,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Integer id) {
-        categoryRepository.deleteCategory(id);
+    public void deleteCategory(Integer id, String currentUser) {
+        getCategoriesById(id,currentUser);
+        categoryRepository.deleteCategory(id,currentUser);
     }
+
 }

@@ -48,5 +48,5 @@ public interface CategoryRepository {
     @Delete("""
             DELETE FROM categories WHERE category_id = #{id}
             """)
-    void deleteCategory (Integer id);
+    void deleteCategory (@Param("id") Integer id, @Param("currentUser")String currentUser);
 }

@@ -16,5 +16,5 @@ public interface CategoryService {
 
     Category updateCategory(Integer id, CategoryRequest categoryRequest, String currentUser);
 
-    void deleteCategory(Integer id);
+    void deleteCategory(Integer id,String currentUser);
 }
