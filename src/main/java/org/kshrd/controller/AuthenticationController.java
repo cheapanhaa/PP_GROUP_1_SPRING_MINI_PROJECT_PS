@@ -66,4 +66,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(authResponse);
     }
 
+    @PostMapping("/resend")
+    public ResponseEntity<?> resendOtp(@RequestParam String email) {
+        String resendOtp = appUserService.resendOtp(email);
+        System.out.println(resendOtp);
+        return ResponseEntity.ok("OTP has been sent to your email");
+    }
 }

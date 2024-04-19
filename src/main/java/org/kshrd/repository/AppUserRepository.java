@@ -32,15 +32,13 @@ public interface AppUserRepository {
     Integer getUserIdByEmail(@Param("email") String email);
 
     @Select("""
-                SELECT u.user_id, email, profile_image FROM categories
-                inner join public.users u on categories.user_id = u.user_id
-                WHERE u.user_id = #{categoryId};
+            SELECT * FROM users
+            WHERE user_id = #{userId}
             """)
-    @Results(id = "userMapDTO", value = {
+    @Results(value = {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "email", column = "email"),
             @Result(property = "profileImage", column = "profile_image")
     })
-    AppUserDTO getAllUserByCategoryId (Integer categoryId);
-
+    AppUserDTO getUserById(@Param("userId") Integer userId);
 }

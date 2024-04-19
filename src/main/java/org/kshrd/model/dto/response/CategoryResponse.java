@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
+import java.net.http.HttpClient;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -16,6 +18,6 @@ import java.time.LocalDateTime;
 public class CategoryResponse <T> {
     private String message;
     private T payload;
-    private String status;
+    HttpStatus status;
     private LocalDateTime localDateTime;
 }
