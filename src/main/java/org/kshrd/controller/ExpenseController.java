@@ -1,6 +1,7 @@
 package org.kshrd.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.constraints.Positive;
 import org.kshrd.model.dto.response.ApiResponse;
 import org.kshrd.model.entity.Expense;
 import org.kshrd.service.ExpenseService;
@@ -22,7 +23,10 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllExpenses(@RequestParam(defaultValue = "1") Integer offset, @RequestParam(defaultValue = "5") Integer limit) {
+    public ResponseEntity<?> getAllExpenses(
+            @RequestParam(defaultValue = "1") @Positive(message = "Offset must be greater than 0") Integer offset,
+            @RequestParam(defaultValue = "3") @Positive(message = "Limit must be greater than 0") Integer limit
+    ) {
         List<Expense> expenseList = expenseService.getAllExpense(offset, limit);
         ApiResponse<List<Expense>> apiResponse = new ApiResponse<>(
                 "get All expense successfully",

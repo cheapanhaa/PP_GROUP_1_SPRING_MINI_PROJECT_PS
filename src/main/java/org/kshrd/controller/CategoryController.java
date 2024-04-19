@@ -43,7 +43,10 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllCategories(@RequestParam(defaultValue = "1") Integer offset, @RequestParam(defaultValue = "5") Integer limit) {
+    public ResponseEntity<?> getAllCategories(
+            @RequestParam(defaultValue = "1") @Positive(message = "Offset must be greater than 0") Integer offset,
+            @RequestParam(defaultValue = "3") @Positive(message = "Limit must be greater than 0") Integer limit
+    ) {
         String currentUser = getUsernameOfCurrentUser();
         List<Category> categoryList = categoryService.getAllCategories(offset, limit, currentUser);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
