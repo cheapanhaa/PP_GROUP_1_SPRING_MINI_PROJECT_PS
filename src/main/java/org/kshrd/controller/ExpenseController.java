@@ -31,10 +31,14 @@ public class ExpenseController {
     @GetMapping
     public ResponseEntity<?> getAllExpenses(
             @RequestParam(defaultValue = "1") @Positive(message = "Offset must be greater than 0") Integer offset,
-            @RequestParam(defaultValue = "3") @Positive(message = "Limit must be greater than 0") Integer limit
-    ) {
+            @RequestParam(defaultValue = "5") @Positive(message = "Limit must be greater than 0") Integer limit,
+            @RequestParam(defaultValue = "expense_id") String shortBy,
+            @RequestParam(defaultValue = "false") boolean orderBY
+
+    )
+    {
         String currentUser=getUsernameOfCurrentUser();
-        List<Expense> expenseList = expenseService.getAllExpense(offset, limit,currentUser);
+        List<Expense> expenseList = expenseService.getAllExpense(offset, limit,shortBy,orderBY,currentUser);
         CategoryResponse<?> categoryResponse = CategoryResponse.builder()
                 .message("Get all expense successfully")
                 .payload(expenseList)
@@ -48,7 +52,7 @@ public class ExpenseController {
              String currentUser = getUsernameOfCurrentUser();
              Expense expense =  expenseService.getExpenseById(id,currentUser);
              CategoryResponse<?> categoryResponse = CategoryResponse.builder()
-                     .message("Get categories by id successfully.")
+                     .message("Get Expense by id successfully.")
                      .payload(expense)
                      .status(HttpStatus.OK)
                      .localDateTime(LocalDateTime.now())
@@ -60,7 +64,7 @@ public class ExpenseController {
             String currentUser=getUsernameOfCurrentUser();
             expenseService.deleteExpenseById(id,currentUser);
             CategoryResponse<?> categoryResponse = CategoryResponse.builder()
-                    .message("Categories has been remove successfully.")
+                    .message("Expense has been remove successfully.")
                     .payload(null)
                     .status(HttpStatus.OK)
                     .localDateTime(LocalDateTime.now())

@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface ExpenseService {
-    List<Expense> getAllExpense(Integer offset, Integer limit, String currentUser);
+//    List<Expense> getAllExpense(Integer offset, Integer limit, String currentUser);
     Expense getExpenseById(Integer id, String currentUser);
     void deleteExpenseById(Integer id,String currentUser);
     Expense insertExpense(ExpenseRequest expenseRequest, String user);
     Expense updateExpense(Integer id, ExpenseRequest expenseRequest, String currentUser);
 
+    List<Expense> getAllExpense(Integer offset, Integer limit, String shortBy, boolean orderBY, String currentUser);
 }

@@ -1,17 +1,17 @@
 package org.kshrd.repository;
 
 import org.apache.ibatis.annotations.*;
-import org.kshrd.model.dto.request.CategoryRequest;
 import org.kshrd.model.dto.request.ExpenseRequest;
-import org.kshrd.model.entity.Category;
 import org.kshrd.model.entity.Expense;
 import java.util.List;
 
 @Mapper
 public interface ExpenseRepository {
     @Select("""
-            SELECT * FROM expenses LIMIT #{limit} OFFSET (#{offset}-1) * #{limit}
-            """)
+            SELECT * FROM expenses
+             ORDER BY ${shortBy} ${orderBy}
+         LIMIT #{limit} OFFSET (#{offset}-1) * #{limit}
+           """)
     @Results(id = "expenseMapping", value = {
             @Result(property = "expenseId", column = "expense_id"),
             @Result(property = "amount", column = "amount"),
@@ -23,7 +23,7 @@ public interface ExpenseRepository {
             one = @One(select = "org.kshrd.repository.AppUserRepository.getCategoryById")
             )
     })
-    List<Expense> getAllExpense(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("currentUser") String currentUser);
+    List<Expense> getAllExpense(@Param("offset") Integer offset, @Param("limit") Integer limit, @Param("currentUser") String currentUser, String orderBy, String shortBy);
 
     @Select("""
         SELECT * FROM expenses
@@ -54,7 +54,6 @@ public interface ExpenseRepository {
             """)
     @ResultMap("expenseMapping")
     Expense updateExpense(Integer id, @Param("expense") ExpenseRequest expenseRequest, @Param("currentUser") String currentUser);
-
 }
 
 

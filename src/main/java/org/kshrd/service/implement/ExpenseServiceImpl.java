@@ -16,10 +16,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         this.expenseRepository = expenseRepository;
     }
 
-    @Override
-    public List<Expense> getAllExpense(Integer offset, Integer limit, String currentUser) {
-        return expenseRepository.getAllExpense(offset,limit,currentUser);
-    }
+//    @Override
+//    public List<Expense> getAllExpense(Integer offset, Integer limit, String currentUser) {
+//        return expenseRepository.getAllExpense(offset,limit,currentUser);
+//    }
 
     @Override
     public Expense getExpenseById(Integer id, String currentUser) {
@@ -50,4 +50,11 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
         return expenseRepository.updateExpense(id,expenseRequest,currentUser);
     }
+    @Override
+    public List<Expense> getAllExpense(Integer offset, Integer limit, String shortBy, boolean orderBY, String currentUser) {
+
+        String orderBy=orderBY?"DESC":"ASC";
+        return expenseRepository.getAllExpense(offset,limit,currentUser,orderBy,shortBy);
+    }
+
 }
